@@ -21,6 +21,10 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
+// current day in header
+const currentDay = dayjs().format('MMMM DD, YYYY');
+        const headerElement = document.getElementById('currentDay');
+        headerElement.textContent = `Today is ${currentDay}.`;
  
 //notes below:
 /*
