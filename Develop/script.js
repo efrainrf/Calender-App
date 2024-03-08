@@ -1,3 +1,9 @@
+var timeDisplayEl = $("#time-display");
+var projectDisplayEl = $("project-display");
+var projectFormEl = $("project-form");
+var projectNameInputEl = $("#project-name-input");
+var projectNameTypeEl = $("#project-type-input");
+var projectNameDateEl = $("#project-date-input");
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
@@ -25,7 +31,36 @@ $(function () {
 const currentDay = dayjs().format('MMMM DD, YYYY');
         const headerElement = document.getElementById('currentDay');
         headerElement.textContent = `Today is ${currentDay}.`;
+
+       /*
+        function saveRow(button) {
+            const row = button.closest('tr');
+            const time = row.querySelector('td:first-child').textContent;
+            const task = row.querySelector('input[type="text"]').value;
+
+            // Save the data (you can use local storage or send it to a server)
+            console.log(`Saved: ${time} - ${task}`);
+        }
+
+        function deleteRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+        /*
+ function saveRow(button) {
+     const row = button.closest('tr');
+     const name = row.querySelector('input[type="text"]').value;
+     const age = row.querySelector('input[type="number"]').value;
+
+     localStorage.setItem('user_name', name);
+     localStorage.setItem('user_age', age);
+
+     // Save the data (you can use local storage or send it to a server)
+     console.log(`Name: ${name}, Age: ${age}`);
+        }
  
+        const currentHour = new Date().getHours();
+        document.getElementById('currentHour').textContent = currentHour;
 //notes below:
 /*
 //global dom elements
@@ -155,7 +190,33 @@ setInterval(updatehour, 1000);
 
 updatehour();
 */
+function saveTask(button) {
+    const timeBlock = button.closest('.time-block');
+    const taskId = timeBlock.id;
+    const taskDescription = timeBlock.querySelector('input').value;
 
+    // Save the task description to local storage
+    localStorage.setItem(taskId, taskDescription);
+
+    // Optionally, provide feedback to the user
+    console.log(`Saved task for ${taskId}: ${taskDescription}`);
+}
+
+// Get the current hour using Day.js
+const currentHour = dayjs().hour();
+
+// Apply classes based on the current hour
+const timeBlocks = document.querySelectorAll('.time-block');
+timeBlocks.forEach((block) => {
+    const blockHour = parseInt(block.id.split('-')[1], 10);
+    if (blockHour < currentHour) {
+        block.classList.add('past');
+    } else if (blockHour === currentHour) {
+        block.classList.add('present');
+    } else {
+        block.classList.add('future');
+    }
+});
 //make a table tag
 // make three trs
 //make three ths
