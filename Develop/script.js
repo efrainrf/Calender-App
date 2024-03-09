@@ -27,6 +27,28 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
+// Get all the time-blocks (assuming they have the class "time-block")
+const timeBlocks = document.querySelectorAll('#time-block');
+
+// Add a click event listener to each "Save" button
+timeBlocks.forEach((block) => {
+    const saveButton = block.querySelector('button');
+    saveButton.addEventListener('click', saveTask);
+});
+
+// Save task description to local storage
+function saveTask(event) {
+    // Get the input element within the same time-block
+    const inputElement = event.target.previousElementSibling;
+    const taskDescription = inputElement.value;
+
+    // Get the unique ID (e.g., "hour-9") from the time-block's ID
+    const timeBlockId = event.target.parentElement.id;
+
+    // Save the task description using the time-block ID as the key
+    localStorage.setItem(timeBlockId, taskDescription);
+}
+
 // current day in header
 const currentDay = dayjs().format('MMMM DD, YYYY');
         const headerElement = document.getElementById('currentDay');
@@ -190,33 +212,7 @@ setInterval(updatehour, 1000);
 
 updatehour();
 */
-function saveTask(button) {
-    const timeBlock = button.closest('.time-block');
-    const taskId = timeBlock.id;
-    const taskDescription = timeBlock.querySelector('input').value;
 
-    // Save the task description to local storage
-    localStorage.setItem(taskId, taskDescription);
-
-    // Optionally, provide feedback to the user
-    console.log(`Saved task for ${taskId}: ${taskDescription}`);
-}
-
-// Get the current hour using Day.js
-const currentHour = dayjs().hour();
-
-// Apply classes based on the current hour
-const timeBlocks = document.querySelectorAll('.time-block');
-timeBlocks.forEach((block) => {
-    const blockHour = parseInt(block.id.split('-')[1], 10);
-    if (blockHour < currentHour) {
-        block.classList.add('past');
-    } else if (blockHour === currentHour) {
-        block.classList.add('present');
-    } else {
-        block.classList.add('future');
-    }
-});
 //make a table tag
 // make three trs
 //make three ths
