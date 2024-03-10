@@ -1,68 +1,21 @@
-var timeDisplayEl = $("#time-display");
-var projectDisplayEl = $("project-display");
-var projectFormEl = $("project-form");
-var projectNameInputEl = $("#project-name-input");
-var projectNameTypeEl = $("#project-type-input");
-var projectNameDateEl = $("#project-date-input");
+
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-});
+var rootEl = $('#root');
+var hour = $("<p>");
+hour.text('9AM')
+hour.css('border', 'rgb(122, 242, 242) 5px solid');
+rootEl.append(hour);
 // current day in header
 const currentDay = dayjs().format('MMMM DD, YYYY');
         const headerElement = document.getElementById('currentDay');
         headerElement.textContent = `Today is ${currentDay}.`;
+        var today = moment().format("dddd, MMMM Do YYYY ");
 
-       /*
-        function saveRow(button) {
-            const row = button.closest('tr');
-            const time = row.querySelector('td:first-child').textContent;
-            const task = row.querySelector('input[type="text"]').value;
 
-            // Save the data (you can use local storage or send it to a server)
-            console.log(`Saved: ${time} - ${task}`);
-        }
 
-        function deleteRow(button) {
-            const row = button.closest('tr');
-            row.remove();
-        }
-        /*
- function saveRow(button) {
-     const row = button.closest('tr');
-     const name = row.querySelector('input[type="text"]').value;
-     const age = row.querySelector('input[type="number"]').value;
 
-     localStorage.setItem('user_name', name);
-     localStorage.setItem('user_age', age);
-
-     // Save the data (you can use local storage or send it to a server)
-     console.log(`Name: ${name}, Age: ${age}`);
-        }
- 
-        const currentHour = new Date().getHours();
-        document.getElementById('currentHour').textContent = currentHour;
-//notes below:
-/*
 //global dom elements
 var timeDisplayEl = $("#time-display");
 var projectDisplayEl = $("project-display");
@@ -180,45 +133,9 @@ diplayTime();
 setInterval(diplayTime, 1000);
 printProjectData();
 
-/*
-function updatehour() {
-const currentTime = dayjs()
-const updateTime = currentTime.format('h:mm A')
-$('#currentDay').textContent = updateTime;
-}
-setInterval(updatehour, 1000);
 
-updatehour();
-*/
-function saveTask(button) {
-    const timeBlock = button.closest('.time-block');
-    const taskId = timeBlock.id;
-    const taskDescription = timeBlock.querySelector('input').value;
-
-    // Save the task description to local storage
-    localStorage.setItem(taskId, taskDescription);
-
-    // Optionally, provide feedback to the user
-    console.log(`Saved task for ${taskId}: ${taskDescription}`);
-}
-
-// Get the current hour using Day.js
-const currentHour = dayjs().hour();
-
-// Apply classes based on the current hour
-const timeBlocks = document.querySelectorAll('.time-block');
-timeBlocks.forEach((block) => {
-    const blockHour = parseInt(block.id.split('-')[1], 10);
-    if (blockHour < currentHour) {
-        block.classList.add('past');
-    } else if (blockHour === currentHour) {
-        block.classList.add('present');
-    } else {
-        block.classList.add('future');
-    }
-});
 //make a table tag
 // make three trs
 //make three ths
 //append all three ths to the tr
-//append the tr to the table
+//append the tr to the table*/
